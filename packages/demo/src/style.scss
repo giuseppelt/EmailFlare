@@ -1,0 +1,247 @@
+@import "../../app/src/style.scss";
+
+$spacer: 1rem;
+$spacers: (
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+);
+
+$utilities: (
+    "margin": (responsive: false,
+        property: margin,
+        class: m,
+        values: map-merge($spacers, (auto: auto))),
+    "margin-x": (responsive: false,
+        property: margin-right margin-left,
+        class: mx,
+        values: map-merge($spacers, (auto: auto))),
+    "margin-y": (responsive: false,
+        property: margin-top margin-bottom,
+        class: my,
+        values: map-merge($spacers, (auto: auto))),
+    "margin-top": (responsive: false,
+        property: margin-top,
+        class: mt,
+        values: map-merge($spacers, (auto: auto))),
+    "margin-end": (responsive: false,
+        property: margin-right,
+        class: me,
+        values: map-merge($spacers, (auto: auto))),
+    "margin-bottom": (responsive: false,
+        property: margin-bottom,
+        class: mb,
+        values: map-merge($spacers, (auto: auto))),
+    "margin-start": (responsive: false,
+        property: margin-left,
+        class: ms,
+        values: map-merge($spacers, (auto: auto))),
+    "padding": (responsive: false,
+        property: padding,
+        class: p,
+        values: map-merge($spacers, (auto: auto))),
+    "padding-x": (responsive: false,
+        property: padding-right padding-left,
+        class: px,
+        values: map-merge($spacers, (auto: auto))),
+    "padding-y": (responsive: false,
+        property: padding-top padding-bottom,
+        class: py,
+        values: map-merge($spacers, (auto: auto))),
+    "padding-top": (responsive: false,
+        property: padding-top,
+        class: pt,
+        values: map-merge($spacers, (auto: auto))),
+    "padding-end": (responsive: false,
+        property: padding-right,
+        class: pe,
+        values: map-merge($spacers, (auto: auto))),
+    "padding-bottom": (responsive: false,
+        property: padding-bottom,
+        class: pb,
+        values: map-merge($spacers, (auto: auto))),
+    "padding-start": (responsive: false,
+        property: padding-left,
+        class: ps,
+        values: map-merge($spacers, (auto: auto))),
+    "gap": (responsive: true,
+        property: gap,
+        class: gap,
+        values: map-merge($spacers, (auto: auto))),
+);
+
+
+$enable-important-utilities: false;
+
+@mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
+    $values: map-get($utility, values);
+
+    // If the values are a list or string, convert it into a map
+    @if type-of($values)=="string" or type-of(nth($values, 1)) !="list" {
+        $values: zip($values, $values);
+    }
+
+    @each $key,
+    $value in $values {
+        $properties: map-get($utility, property);
+
+        // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+        @if type-of($properties)=="string" {
+            $properties: append((), $properties);
+        }
+
+        // Use custom class if present
+        $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
+        $property-class: if($property-class ==null, "", $property-class);
+
+        // Use custom CSS variable name if present, otherwise default to `class`
+        $css-variable-name: if(map-has-key($utility, css-variable-name), map-get($utility, css-variable-name), map-get($utility, class));
+
+        // State params to generate pseudo-classes
+        $state: if(map-has-key($utility, state), map-get($utility, state), ());
+
+        $infix: if($property-class =="" and str-slice($infix, 1, 1)=="-", str-slice($infix, 2), $infix);
+
+        // Don't prefix if value key is null (e.g. with shadow class)
+        $property-class-modifier: if($key, if($property-class =="" and $infix =="", "", "-") + $key, "");
+
+        @if map-get($utility, rfs) {
+
+            // Inside the media query
+            @if $is-rfs-media-query {
+                $val: rfs-value($value);
+
+                // Do not render anything if fluid and non fluid values are the same
+                $value: if($val ==rfs-fluid-value($value), null, $val);
+            }
+
+            @else {
+                $value: rfs-fluid-value($value);
+            }
+        }
+
+        $is-css-var: map-get($utility, css-var);
+        $is-local-vars: map-get($utility, local-vars);
+        $is-rtl: map-get($utility, rtl);
+
+        @if $value !=null {
+            @if $is-rtl ==false {
+                /* rtl:begin:remove */
+            }
+
+            @if $is-css-var {
+                .#{$property-class + $infix + $property-class-modifier} {
+                    --#{$prefix}#{$css-variable-name}: #{$value};
+                }
+
+                @each $pseudo in $state {
+                    .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+                        --#{$prefix}#{$css-variable-name}: #{$value};
+                    }
+                }
+            }
+
+            @else {
+                .#{$property-class + $infix + $property-class-modifier} {
+                    @each $property in $properties {
+                        @if $is-local-vars {
+
+                            @each $local-var,
+                            $variable in $is-local-vars {
+                                --#{$prefix}#{$local-var}: #{$variable};
+                            }
+                        }
+
+                        #{$property}: $value if($enable-important-utilities, !important, null);
+                    }
+                }
+
+                @each $pseudo in $state {
+                    .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+                        @each $property in $properties {
+                            @if $is-local-vars {
+
+                                @each $local-var,
+                                $variable in $is-local-vars {
+                                    --#{$prefix}#{$local-var}: #{$variable};
+                                }
+                            }
+
+                            #{$property}: $value if($enable-important-utilities, !important, null);
+                        }
+                    }
+                }
+            }
+
+            @if $is-rtl ==false {
+                /* rtl:end:remove */
+            }
+        }
+    }
+}
+
+@each $key,
+$utility in $utilities {
+    @if type-of($utility)=="map" {
+        @include generate-utility($utility, "");
+    }
+}
+
+
+.d-flex {
+    display: flex;
+    align-items: center;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.flex-no-shrink {
+    flex-shrink: 0;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.notice {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    background-color: #e7ed8b;
+    border-radius: var(--rounded);
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+}
+
+#form-builder {
+    margin-top: 2rem;
+}
+
+form {
+    .hint {
+        margin-top: 1.2rem;
+        font-size: 0.8rem;
+        color: var(--color-dim);
+        display: block;
+    }
+
+    h4 {
+        margin-top: 1rem;
+    }
+
+    h4+.hint {
+        margin-top: 0;
+    }
+}
+
+.field {
+    .action-btn {
+        padding: 0.3rem 0.5rem;
+        margin-left: 0.4rem;
+        min-width: 80px;
+    }
+}

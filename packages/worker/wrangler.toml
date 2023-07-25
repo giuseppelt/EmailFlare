@@ -1,0 +1,6 @@
+compatibility_date = "2023-03-14"
+compatibility_flags = ["nodejs_compat", "experimental"]
+main = "./dist/index.js"
+
+[dev]
+port = 3611

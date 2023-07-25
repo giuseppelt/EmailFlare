@@ -1,0 +1,22 @@
+{
+    "name": "@emailflare/worker",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev:api": "wrangler dev index.ts",
+        "dev:bundle": "wrangler dev dist/index.bundle.js",
+        "dev:index": "wrangler dev dist/index.js",
+        "build:bun": "bun ./index.bundle.ts --target browser --external \"node:*\" --minify --outdir ./dist",
+        "build:bun:win": "wsl -- /home/giuse/.bun/bin/bun build ./index.bundle.ts --target browser --external \"node:*\" --minify --outdir ./dist",
+        "build:esbuild": "node tasks/build.js"
+    },
+    "dependencies": {
+        "@httpc/adapter-cloudflare": "0.0.1-pre20230731094045",
+        "@httpc/server": "0.2.0-pre20230731094045"
+    },
+    "devDependencies": {
+        "esbuild": "^0.18.17",
+        "wrangler": "^3.3.0"
+    }
+}

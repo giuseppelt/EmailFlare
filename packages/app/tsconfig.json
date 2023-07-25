@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.react.json",
+  "compilerOptions": {
+    "jsxImportSource": "preact"
+  },
+  "include": [
+    "src"
+  ]
+}

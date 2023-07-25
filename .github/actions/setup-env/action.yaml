@@ -1,0 +1,27 @@
+name: "Setup env"
+description: "Complete setup of node, pnpm and install dependencies"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - uses: pnpm/action-setup@v2.2.4
+      with:
+        version: 8.6.10
+        run_install: false
+
+    - name: Cache pnpm modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.pnpm-store
+        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm
+
+    - name: Install dependencies
+      run: |-
+        pnpm config set store-dir ~/.pnpm-store
+        pnpm install -r --frozen-lockfile
+      shell: bash

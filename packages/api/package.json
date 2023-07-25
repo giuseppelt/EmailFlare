@@ -1,0 +1,26 @@
+{
+    "name": "@emailflare/api",
+    "version": "0.1.0",
+    "private": true,
+    "main": "dist/index.js",
+    "scripts": {
+        "start": "node dist/index.js",
+        "build": "rimraf dist && tsc -p tsconfig.build.json",
+        "dev": "ts-node-dev -T src/index.ts",
+        "dev:debug": "ts-node-dev --inspect -T src/index.ts",
+        "generate:client": "httpc client generate"
+    },
+    "dependencies": {
+        "@httpc/server": "0.2.0-pre20230731094045",
+        "dotenv": "^16.3.1"
+    },
+    "devDependencies": {
+        "@httpc/cli": "0.2.0-pre20230520161649",
+        "@types/node": "^18.16.19",
+        "@types/node-fetch": "^2.6.4",
+        "rimraf": "^5.0.1",
+        "ts-node": "^10.9.1",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.1.6"
+    }
+}

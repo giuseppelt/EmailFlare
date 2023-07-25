@@ -1,0 +1,61 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "api dev",
+            "type": "npm",
+            "script": "dev",
+            "group": "build",
+            "path": "${workspaceFolder}/packages/api",
+            "options": {
+                "cwd": "${workspaceFolder}/packages/api"
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "app dev",
+            "type": "npm",
+            "script": "dev",
+            "group": "build",
+            "path": "${workspaceFolder}/packages/app",
+            "options": {
+                "cwd": "${workspaceFolder}/packages/app"
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+        {
+            "label": "tsc watch",
+            "type": "npm",
+            "script": "watch:ts",
+            "group": "build",
+            "isBackground": true,
+            "problemMatcher": "$tsc-watch",
+            "presentation": {
+                "reveal": "never"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "demo dev",
+            "type": "npm",
+            "script": "dev",
+            "group": "build",
+            "path": "${workspaceFolder}/packages/demo",
+            "options": {
+                "cwd": "${workspaceFolder}/packages/demo"
+            },
+            "isBackground": true,
+            "presentation": {
+                "reveal": "never"
+            }
+        },
+    ]
+}

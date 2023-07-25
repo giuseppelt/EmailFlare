@@ -1,0 +1,29 @@
+{
+  "name": "@emailflare/app",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@emailflare/api": "workspace:^",
+    "@fontsource-variable/saira": "^5.0.6",
+    "@iconify-json/mdi": "^1.1.53",
+    "@preact/preset-vite": "^2.5.0",
+    "@types/marked": "^5.0.1",
+    "dotenv": "^16.3.1",
+    "sass": "^1.64.1",
+    "typescript": "^5.1.6",
+    "unplugin-icons": "^0.16.5",
+    "vite": "^4.4.4",
+    "vite-plugin-svgr": "^3.2.0"
+  },
+  "dependencies": {
+    "@httpc/client": "0.2.0-pre20230503165257",
+    "marked": "^5.1.1",
+    "preact": "^10.16.0"
+  }
+}

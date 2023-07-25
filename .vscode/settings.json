@@ -1,0 +1,31 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/obj": true,
+        "**/.vs": true,
+        "**/dist": true,
+        "**/build": true,
+        "**/.build": true,
+        "**/.tsbuildinfo": true,
+        "**/.docusaurus": true,
+        "**/.next": true,
+        "**/.vercel": true,
+        "**/.expo": true,
+        "**/.expo-shared": true
+    },
+    "[typescriptreact]": {
+        "editor.tabSize": 2
+    },
+    "[html]": {
+        "editor.tabSize": 2
+    },
+    "[jade]": {
+        "editor.tabSize": 2
+    },
+    "jest.autoRun": "off",
+    "typescript.tsdk": "node_modules\\typescript\\lib"
+}

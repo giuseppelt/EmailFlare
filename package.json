@@ -1,0 +1,30 @@
+{
+    "name": "emailflare-mono",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "watch:ts": "tsc --build tsconfig.dev.json --watch --incremental --force",
+        "overrides:on": "zx scripts/pnpm-overrides-set.mjs",
+        "overrides:off": "zx scripts/pnpm-overrides-clear.mjs"
+    },
+    "devDependencies": {
+        "typescript": "^5.1.6",
+        "zx": "^7.2.3"
+    },
+    "pnpm": {
+        "peerDependencyRules": {
+            "ignoreMissing": [
+                "@types/node",
+                "@babel/core",
+                "prop-types",
+                "rollup"
+            ]
+        },
+        "overrides": {
+            "@httpc/server": "link:../httpc/packages/server/",
+            "@httpc/client": "link:../httpc/packages/client/",
+            "@httpc/cli": "link:../httpc/packages/cli/",
+            "@httpc/adapter-cloudflare": "link:../httpc/packages/adapter-cloudflare/"
+        }
+    }
+}
