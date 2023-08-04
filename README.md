@@ -1,10 +1,17 @@
-# EmailFlare
+# EmailFlare ✉️✨
 
 >
 > **Note**
-> _A full tutorial on how to copy and setup your own EmailFlare for your domain is available at [blog post](https://www.breakp.dev/blog/email-flare-send-from-worker-for-free/)._
+> Follow me on [@giuseppelt](https://twitter.com/giuseppelt) where I publish updates and collect feature requests and issues
 >
 
+>
+> **Note**
+> A full tutorial on how to copy and setup your own EmailFlare for your domain is available at [blog post](https://www.breakp.dev/blog/email-flare-send-from-worker-for-free/)
+>
+
+
+## What is EmailFlare?
 **EmailFlare** allows you to send emails from your own domain through Cloudflare for free.
 
 As open-source MIT-licensed software, you can host your own EmailFlare on your domain and keep everything in control.
