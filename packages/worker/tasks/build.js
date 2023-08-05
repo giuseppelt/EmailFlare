@@ -16,7 +16,6 @@ await esbuild.build({
     bundle: true,
     minify: true,
     entryPoints: ["./dist/index.ts"],
-    outdir: "./dist",
     outfile: "./dist/index.bundle.js",
     format: "esm",
     target: "esnext",
