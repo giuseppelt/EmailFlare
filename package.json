@@ -19,12 +19,6 @@
                 "prop-types",
                 "rollup"
             ]
-        },
-        "overrides": {
-            "@httpc/server": "link:../httpc/packages/server/",
-            "@httpc/client": "link:../httpc/packages/client/",
-            "@httpc/cli": "link:../httpc/packages/cli/",
-            "@httpc/adapter-cloudflare": "link:../httpc/packages/adapter-cloudflare/"
         }
     }
 }
