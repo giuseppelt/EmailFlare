@@ -29,7 +29,7 @@ if (!part || part === "template") {
     console.log(" OK template:app:build");
 
     cd("../demo");
-    await spinner("template:build", () => $`pnpm run --filter @emailflare/worker build:bun:win`);
+    await spinner("template:build", () => $`pnpm run --filter @emailflare/worker build:esbuild ${argv.config ? "--config" : ""}`);
     console.log(" OK template:build");
 
     await spinner("template:copy", async () => {
