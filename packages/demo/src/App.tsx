@@ -186,6 +186,10 @@ function BuilderPage() {
               )}
             </div>
           }
+          <div class="field items-center" style="min-height: 35px">
+            <input type="checkbox" id="custom-sender" name="customSender" checked={!!config.customSender} onChange={ev => setConfig(x => ({ ...x, customSender: !!(ev.target as HTMLInputElement).checked }))} />
+            <label class="flex-grow ms-1 static" for="custom-sender">Allow custom sender <small class="color-dim">You will type the address manually</small></label>
+          </div>
 
           <div class="field mt-4 items-center" style="min-height: 35px">
             <label for="deploy" class="visible-lg">Deploy</label>

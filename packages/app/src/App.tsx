@@ -22,6 +22,10 @@ type AppProps = {
 export default function App({ slots, section = "Compose" }: AppProps) {
   const refText = useRef<HTMLTextAreaElement>(null);
   const [tabIndex, setTabIndex] = useState(0);
+  const [senderMode, setSenderMode] = useState<"preset" | "manual">("preset");
+
+  const hasPresetSenders = (config?.senders?.length || 0) > 0;
+  const isCustomSender = senderMode === "manual" || !hasPresetSenders;
 
   const [localError, setLocalError] = useState("");
   const { isLoading, isSuccess, isError, errorMessage, call: send } = useApiCall(api.sendEmail);
@@ -84,9 +88,19 @@ export default function App({ slots, section = "Compose" }: AppProps) {
           </div>
           <div class="field">
             <label for="from">From</label>
-            <select id="from" name="from" required>
-              {config?.senders.map(x => <option value={x}>{x}</option>)}
-            </select>
+            {isCustomSender &&
+              <input id="from" name="from" type="text" required />
+            }
+            {!isCustomSender &&
+              <select id="from" name="from" required>
+                {config?.senders?.map(x => <option value={x}>{x}</option>)}
+              </select>
+            }
+            {config.customSender && hasPresetSenders &&
+              <button type="button" class="btn action-btn btn-primary" onClick={() => setSenderMode(v => v === "manual" ? "preset" : "manual")}>
+                {isCustomSender ? "Presets" : "Manual"}
+              </button>
+            }
           </div>
           <div class="field">
             <label for="to">To</label>

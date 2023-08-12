@@ -3,5 +3,6 @@
         "Customer Support <support@yourdomain.com>",
         "Hello <hello@yourdomain.com>",
         "Ceo <ceo@yourdomain.com>"
-    ]
+    ],
+    "customSender": false
 }

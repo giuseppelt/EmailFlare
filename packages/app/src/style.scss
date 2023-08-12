@@ -316,6 +316,12 @@ textarea {
         }
     }
 
+    .action-btn {
+        padding: 0.3rem 0.5rem;
+        margin-left: 0.4rem;
+        min-width: 80px;
+    }
+
     @media (max-width: 768px) {
         label:not(.static) {
             transform: none;
