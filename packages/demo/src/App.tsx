@@ -52,8 +52,8 @@ function NavLinks() {
     <>
       <span><a href="/help"><span class="visible-lg">What is this?</span><span class="visible-sm">Help?</span></a></span>
       <span>
-        <a class="icon-link" title="Configuration" href="/builder"><IconSettings class="icon" /></a>
-        <a class="icon-link" title="Share" href={GITHUB} target="_blank"><IconShare class="icon" /></a>
+        <a class="icon-link visible-lg" title="Configuration" href="/builder"><IconSettings class="icon" /></a>
+        <a class="icon-link visible-lg" title="Share" href={GITHUB} target="_blank"><IconShare class="icon" /></a>
         <a class="icon-link" href={TWITTER} target="_blank"><IconTwitter class="icon" /></a>
         <a class="icon-link" title="Repository" href={GITHUB} target="_blank"><IconGithub class="icon" /></a>
       </span>
