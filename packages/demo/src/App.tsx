@@ -294,7 +294,7 @@ function HelpPage() {
 
         <div class="md">
           <h3>How it works?</h3>
-          <p>EmailFlare is an open-source webapp, you can use to create your own version of EmailFlare for your domain.</p>
+          <p>EmailFlare is an open-source webapp, you can use to <a href="/builder">create your own version</a> of EmailFlare for your domain.</p>
           <p>You can use the <b>deploy wizard</b> to host EmailFlare on your Cloudflare account. You can make it available to a subdomain of your choice, for example: <i>email.your-domain.com</i>. And from there, you can send emails for your domain.</p>
 
           <h3>Step by step tutorial</h3>
