@@ -1,6 +1,6 @@
 {
     "name": "emailflare-mono",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "private": true,
     "scripts": {
         "watch:ts": "tsc --build tsconfig.dev.json --watch --incremental --force",
