@@ -12,8 +12,8 @@
         "build:esbuild": "node tasks/build.js"
     },
     "dependencies": {
-        "@httpc/adapter-cloudflare": "0.0.1-pre20230731094045",
-        "@httpc/server": "0.2.0-pre20230731094045"
+        "@httpc/adapter-cloudflare": "0.0.1-pre20230812124313",
+        "@httpc/server": "0.2.0-pre20230812124313"
     },
     "devDependencies": {
         "esbuild": "^0.18.17",

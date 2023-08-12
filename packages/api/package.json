@@ -11,7 +11,7 @@
         "generate:client": "httpc client generate"
     },
     "dependencies": {
-        "@httpc/server": "0.2.0-pre20230731094045",
+        "@httpc/server": "0.2.0-pre20230812124313",
         "dotenv": "^16.3.1"
     },
     "devDependencies": {

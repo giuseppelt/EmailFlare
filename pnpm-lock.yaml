@@ -156,8 +156,8 @@ importers:
   packages/worker:
     dependencies:
       '@httpc/adapter-cloudflare':
-        specifier: link:../../../httpc/packages/adapter-cloudflare
-        version: link:../../../httpc/packages/adapter-cloudflare
+        specifier: 0.0.1-pre20230812124313
+        version: 0.0.1-pre20230812124313(@httpc/server@httpc+packages+server)
       '@httpc/server':
         specifier: link:../../../httpc/packages/server
         version: link:../../../httpc/packages/server
@@ -1117,6 +1117,21 @@ packages:
   /@fontsource-variable/saira@5.0.6:
     resolution: {integrity: sha512-/oqneUw0CPowlysw5IIwKKsCJYFDHR51kABtWh/jRgcG+GC/zqxIGoQI8iQ3CI8MT/BNpzMD5I0JHVIlMnv5OQ==}
     dev: true
+
+  /@httpc/adapter-cloudflare@0.0.1-pre20230812124313(@httpc/server@httpc+packages+server):
+    resolution: {integrity: sha512-/yUAr5zFzT0ui1xz6eExELQE8poBXeL/a0L7Ab7rLe+67I28YgZAg2N3jdn4FZ0ZAtDA3Bv4poKxuMmujX2mtA==}
+    engines: {node: '>=16.13'}
+    peerDependencies:
+      '@httpc/kit': ^0.2.0-pre
+      '@httpc/server': ^0.2.0-pre
+    peerDependenciesMeta:
+      '@httpc/kit':
+        optional: true
+      '@httpc/server':
+        optional: true
+    dependencies:
+      '@httpc/server': link:../httpc/packages/server
+    dev: false
 
   /@iconify-json/mdi@1.1.53:
     resolution: {integrity: sha512-qG72Tc9Bd4w7fha+kMEySVTbH4Obgb9xA1mQl+WReFhtZ3PjcVpIWLgZGTewuIfZY8RAbd8zfAqhZ7qEYZWrhg==}
