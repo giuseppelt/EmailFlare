@@ -1,6 +1,6 @@
 # EmailFlare Changelog
 
-## 0.1.1 First Release
+## 0.1.1 First Request
 - feat: allow custom sender
 
 
