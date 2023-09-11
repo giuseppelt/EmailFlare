@@ -1,8 +1,8 @@
 import type { VNode } from "preact";
-import { useState, useRef } from "preact/hooks";
-import { marked } from "marked";
+import { useRef, useState } from "preact/hooks";
 import { api, setSecret } from "./api";
 import { useApiCall } from "./hooks";
+import { BodyEditor, MailBodyEditorRef } from "./components";
 import IconCheck from "~icons/mdi/check-bold";
 import IconAlert from "~icons/mdi/alert";
 import IconSettings from "~icons/mdi/gear";
@@ -20,8 +20,7 @@ type AppProps = {
 }
 
 export default function App({ slots, section = "Compose" }: AppProps) {
-  const refText = useRef<HTMLTextAreaElement>(null);
-  const [tabIndex, setTabIndex] = useState(0);
+  const [refBody, setRefBody] = useState<MailBodyEditorRef>();
   const [senderMode, setSenderMode] = useState<"preset" | "manual">("preset");
 
   const hasPresetSenders = (config?.senders?.length || 0) > 0;
@@ -31,13 +30,13 @@ export default function App({ slots, section = "Compose" }: AppProps) {
   const { isLoading, isSuccess, isError, errorMessage, call: send } = useApiCall(api.sendEmail);
 
   const onSubmit = (ev: Event) => {
+    setLocalError("");
     ev.preventDefault();
     ev.stopPropagation();
 
-    if (!refText.current) return;
+    if (!refBody) return;
 
-    const text = refText.current.value?.trim() || undefined;
-    const html = text && mdToHtml(text) || undefined;
+    const { text, html } = refBody.getBody() || {};
     if (!text && !html) {
       setLocalError("Missing Body");
       return;
@@ -112,22 +111,7 @@ export default function App({ slots, section = "Compose" }: AppProps) {
           </div>
 
           <div class="field-body">
-            <div class="tabs">
-              <div class="tabs-header">
-                <button type="button" class={tabIndex === 0 ? "active" : undefined} onClick={() => setTabIndex(0)}>Markdown</button>
-                <button type="button" class={tabIndex === 1 ? "active" : undefined} onClick={() => setTabIndex(1)}>Preview</button>
-              </div>
-              <div class="tabs-body">
-                <div class={`tabs-panel${tabIndex === 0 ? " active" : ""}`}>
-                  <div class="panel-text"><textarea ref={refText} /></div>
-                </div>
-                {tabIndex === 1 && (
-                  <div class={`tabs-panel active`}>
-                    <div class="panel-preview md" dangerouslySetInnerHTML={{ __html: mdToHtml(refText.current?.value || "") }} />
-                  </div>
-                )}
-              </div>
-            </div>
+            <BodyEditor accessor={setRefBody} />
           </div>
 
           <div class="form-footer">
@@ -158,10 +142,3 @@ export default function App({ slots, section = "Compose" }: AppProps) {
 const GITHUB = "https://github.com/giuseppelt/emailflare";
 const BUILDER = "https://emailflare.breakp.dev/builder";
 
-function mdToHtml(md: string): string {
-  return marked(md, {
-    gfm: true,
-    mangle: false,
-    headerIds: false,
-  });
-}

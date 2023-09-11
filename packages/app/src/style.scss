@@ -359,24 +359,35 @@ textarea {
 
 .tabs {
     .tabs-header {
-        margin-bottom: 0.2rem;
         display: flex;
         gap: 0.1rem;
 
         button {
             padding: 0.2rem 0.6rem;
-            border-radius: 20px;
             font-size: 0.85rem;
             border: 0;
             background-color: transparent;
+            color: var(--color-dim);
 
             &:hover {
                 background-color: rgb(0, 0, 0, .05);
+                color: var(--color-accent);
             }
 
             &.active {
-                background-color: var(--color-accent);
-                color: var(--color-text-on-accent);
+                // background-color: var(--color-accent);
+                // color: var(--color-text-on-accent);
+                color: var(--color-accent);
+                font-weight: 500;
+                border-bottom: 2px solid var(--color-accent);
+            }
+        }
+
+        &>.side-header {
+            margin-left: auto;
+
+            button {
+                color: var(--color-accent);
             }
         }
     }
@@ -392,10 +403,51 @@ textarea {
     }
 }
 
+.dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    list-style: none;
+    position: absolute;
+    background-color: var(--bg-color);
+    border: 1px solid var(--color-dim);
+    width: 100%;
+    visibility: hidden;
+}
+
+.dropdown-content li button {
+    padding: 0.2rem 0.6rem;
+    font-size: 0.85rem;
+    display: block;
+    color: var(--color-accent);
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+
+.dropdown:focus-within .dropdown-content {
+    visibility: visible;
+}
 
 .panel-text {
     textarea {
         font-family: var(--font-fallback);
+    }
+}
+
+.panel-html {
+    textarea {
+        font-size: 0.85rem;
+        font-family: monospace;
     }
 }
 
