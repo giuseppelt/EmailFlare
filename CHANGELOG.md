@@ -1,5 +1,9 @@
 # EmailFlare Changelog
 
+## 0.1.2 Second Request
+- feat: new custom html raw editor
+
+
 ## 0.1.1 First Request
 - feat: allow custom sender
 
